@@ -3,7 +3,7 @@ const router = express.Router();
 const multer = require('multer');
 const path = require('path');
 const fs = require('fs');
-const auth = require('../middleware/auth');
+const { auth } = require('../middleware/auth');
 const Report = require('../models/Report');
 const Student = require('../models/Student');
 
@@ -42,12 +42,12 @@ router.get('/faculty', auth, async (req, res) => {
   try {
     const students = await Student.find({ assignedFaculty: req.user._id });
     const studentIds = students.map(student => student._id);
-    
+
     const reports = await Report.find({ student: { $in: studentIds } })
       .populate('student', 'firstName lastName rollNumber')
       .populate('createdBy', 'firstName lastName')
       .sort({ submissionDate: -1 });
-    
+
     res.json(reports);
   } catch (err) {
     console.error('Get faculty reports error:', err);
@@ -63,14 +63,14 @@ router.get('/:id', auth, async (req, res) => {
       .populate('student', 'firstName lastName rollNumber')
       .populate('createdBy', 'firstName lastName')
       .populate('comments.user', 'firstName lastName');
-    
+
     if (!report) {
       return res.status(404).json({ message: 'Report not found' });
     }
 
     // Check if user has access to this report
     const student = await Student.findById(report.student);
-    if (student.assignedFaculty.toString() !== req.user._id.toString() && 
+    if (student.assignedFaculty.toString() !== req.user._id.toString() &&
         report.createdBy.toString() !== req.user._id.toString() &&
         req.user.role !== 'admin') {
       return res.status(403).json({ message: 'Not authorized' });
@@ -95,7 +95,7 @@ router.post('/', [auth, upload.single('reportFile')], async (req, res) => {
       return res.status(404).json({ message: 'Student not found' });
     }
 
-    if (studentDoc.assignedFaculty.toString() !== req.user._id.toString() && 
+    if (studentDoc.assignedFaculty.toString() !== req.user._id.toString() &&
         req.user.role !== 'admin') {
       return res.status(403).json({ message: 'Not authorized' });
     }
@@ -116,7 +116,7 @@ router.post('/', [auth, upload.single('reportFile')], async (req, res) => {
     });
 
     await report.save();
-    
+
     const populatedReport = await Report.findById(report._id)
       .populate('student', 'firstName lastName rollNumber')
       .populate('createdBy', 'firstName lastName');
@@ -138,7 +138,7 @@ router.post('/:id/comments', auth, async (req, res) => {
     }
 
     const student = await Student.findById(report.student);
-    if (student.assignedFaculty.toString() !== req.user._id.toString() && 
+    if (student.assignedFaculty.toString() !== req.user._id.toString() &&
         req.user.role !== 'admin') {
       return res.status(403).json({ message: 'Not authorized' });
     }
@@ -172,7 +172,7 @@ router.get('/download/:id', auth, async (req, res) => {
     }
 
     const student = await Student.findById(report.student);
-    if (student.assignedFaculty.toString() !== req.user._id.toString() && 
+    if (student.assignedFaculty.toString() !== req.user._id.toString() &&
         report.createdBy.toString() !== req.user._id.toString() &&
         req.user.role !== 'admin') {
       return res.status(403).json({ message: 'Not authorized' });

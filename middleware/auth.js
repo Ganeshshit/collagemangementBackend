@@ -7,18 +7,18 @@ const authMiddleware = async (req, res, next) => {
     const authHeader = req.header('Authorization');
     console.log('Auth middleware called');
     console.log('Authorization header:', authHeader);
-    
+
     // Check if no token
     if (!authHeader || !authHeader.startsWith('Bearer ')) {
       console.log('No authorization header provided or invalid format');
       return res.status(401).json({ message: 'No token, authorization denied' });
     }
-    
+
     // Extract token from Bearer format
     const token = authHeader.substring(7, authHeader.length);
-    
+
     console.log('Token extracted:', token);
-    
+
     if (!token) {
       console.log('No token provided');
       return res.status(401).json({ message: 'No token, authorization denied' });
@@ -37,7 +37,7 @@ const authMiddleware = async (req, res, next) => {
       // Add user from payload
       req.user = decoded.user;
       console.log('User ID from token:', req.user.id);
-      
+
       next();
     } catch (err) {
       console.error('Token verification error:', err);
@@ -55,4 +55,4 @@ const authMiddleware = async (req, res, next) => {
   }
 };
 
-module.exports = authMiddleware;
+module.exports = { auth: authMiddleware };

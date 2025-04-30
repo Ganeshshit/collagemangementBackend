@@ -3,32 +3,32 @@ const router = express.Router();
 const bcrypt = require('bcryptjs');
 const { check, validationResult } = require('express-validator');
 const User = require('../models/User');
-const auth = require('../middleware/auth');
+const { auth } = require('../middleware/auth');
 
 // Middleware to check if user is admin
 const isAdmin = async (req, res, next) => {
   try {
     console.log('isAdmin middleware - user:', req.user);
-    
+
     if (!req.user || !req.user.id) {
       console.log('No user ID in request');
       return res.status(401).json({ message: 'Authentication required' });
     }
-    
+
     const user = await User.findById(req.user.id);
-    
+
     if (!user) {
       console.log('User not found in database');
       return res.status(404).json({ message: 'User not found' });
     }
-    
+
     console.log('User role:', user.role);
-    
+
     if (user.role !== 'admin' && user.role !== 'superadmin') {
       console.log('User is not admin or superadmin');
       return res.status(403).json({ message: 'Access denied. Admin role required' });
     }
-    
+
     console.log('User is admin, proceeding to next middleware');
     next();
   } catch (err) {
@@ -55,8 +55,8 @@ router.get('/users', auth, isAdmin, async (req, res) => {
 // @route   POST api/admin/users
 // @desc    Create a new user
 // @access  Admin only
-router.post('/users', 
-  auth, 
+router.post('/users',
+  auth,
   isAdmin,
   [
     check('username', 'Username is required').not().isEmpty(),
@@ -69,7 +69,7 @@ router.post('/users',
   async (req, res) => {
     console.log('POST /users - Creating new user');
     console.log('Request body:', req.body);
-    
+
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       console.log('Validation errors:', errors.array());
@@ -103,7 +103,7 @@ router.post('/users',
 
       // Return the user without password
       const userResponse = await User.findById(user._id).select('-password');
-      res.status(201).json({ 
+      res.status(201).json({
         message: 'User created successfully',
         user: userResponse
       });
@@ -120,7 +120,7 @@ router.post('/users',
 router.put('/users/:id', auth, isAdmin, async (req, res) => {
   console.log(`PUT /users/${req.params.id} - Updating user`);
   console.log('Request body:', req.body);
-  
+
   const { username, email, password, firstName, lastName, role } = req.body;
 
   // Build user object
@@ -152,7 +152,7 @@ router.put('/users/:id', auth, isAdmin, async (req, res) => {
     ).select('-password');
 
     console.log('User updated successfully');
-    res.json({ 
+    res.json({
       message: 'User updated successfully',
       user
     });
@@ -167,7 +167,7 @@ router.put('/users/:id', auth, isAdmin, async (req, res) => {
 // @access  Admin only
 router.delete('/users/:id', auth, isAdmin, async (req, res) => {
   console.log(`DELETE /users/${req.params.id} - Deleting user`);
-  
+
   try {
     const user = await User.findById(req.params.id);
 
@@ -178,7 +178,7 @@ router.delete('/users/:id', auth, isAdmin, async (req, res) => {
 
     await User.findByIdAndRemove(req.params.id);
     console.log('User deleted successfully');
-    
+
     res.json({ message: 'User deleted successfully' });
   } catch (err) {
     console.error('Error deleting user:', err);

@@ -4,7 +4,7 @@ const User = require('../models/User');
 const router = express.Router();
 const bcrypt = require('bcryptjs');
 const { check, validationResult } = require('express-validator');
-const auth = require('../middleware/auth');
+const { auth } = require('../middleware/auth');
 
 // Auth middleware
 const authMiddleware = async (req, res, next) => {
@@ -16,7 +16,7 @@ const authMiddleware = async (req, res, next) => {
 
     const decoded = jwt.verify(token, process.env.JWT_SECRET || 'your-secret-key');
     const user = await User.findById(decoded.userId);
-    
+
     if (!user) {
       return res.status(401).json({ message: 'User not found' });
     }
@@ -74,7 +74,7 @@ router.post('/login', [
         if (err) throw err;
         console.log('Login successful for user:', username);
         console.log('Token generated:', token);
-        
+
         // Return user info without password
         const userResponse = {
           id: user.id,
@@ -85,7 +85,7 @@ router.post('/login', [
           role: user.role,
           studentInfo: user.studentInfo
         };
-        
+
         res.json({ token, user: userResponse });
       }
     );
@@ -102,12 +102,12 @@ router.get('/me', auth, async (req, res) => {
   try {
     console.log('Getting current user info for ID:', req.user.id);
     const user = await User.findById(req.user.id).select('-password');
-    
+
     if (!user) {
       console.log('User not found');
       return res.status(404).json({ message: 'User not found' });
     }
-    
+
     console.log('User found:', user.username);
     res.json(user);
   } catch (err) {

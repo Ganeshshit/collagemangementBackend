@@ -6,6 +6,7 @@ const path = require('path');
 const authRoutes = require('./routes/auth');
 const reportRoutes = require('./routes/reports');
 const adminRoutes = require('./routes/admin');
+const studentRoutes = require('./routes/student');
 
 const app = express();
 
@@ -47,10 +48,11 @@ mongoose.connect(MONGODB_URI, {
 app.use('/api/auth', authRoutes);
 app.use('/api/reports', reportRoutes);
 app.use('/api/admin', adminRoutes);
+app.use('/api/student', studentRoutes);
 
 // Test route
 app.get('/api/test', (req, res) => {
-  res.json({ 
+  res.json({
     message: 'API server is working!',
     mongodbStatus: mongoose.connection.readyState === 1 ? 'connected' : 'disconnected'
   });
@@ -59,7 +61,7 @@ app.get('/api/test', (req, res) => {
 // Error handling
 app.use((err, req, res, next) => {
   console.error('Error:', err);
-  res.status(500).json({ 
+  res.status(500).json({
     message: 'Server error',
     error: process.env.NODE_ENV === 'development' ? err.message : undefined
   });

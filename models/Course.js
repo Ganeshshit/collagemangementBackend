@@ -1,6 +1,15 @@
 const mongoose = require('mongoose');
 
 const courseSchema = new mongoose.Schema({
+  batchId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Batch',
+    required: true
+  },
+  batchName: {
+    type: String,
+    required: true
+  },
   title: {
     type: String,
     required: true,
@@ -16,8 +25,27 @@ const courseSchema = new mongoose.Schema({
     required: true
   },
   students: [{
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'User'
+    student: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'User',
+      required: true
+    },
+    enrollmentDate: {
+      type: Date,
+      default: Date.now
+    },
+    status: {
+      type: String,
+      enum: ['active', 'completed', 'dropped'],
+      default: 'active'
+    },
+    progress: {
+      type: Number,
+      min: 0,
+      max: 100,
+      default: 0
+    },
+    lastAccessed: Date
   }],
   startDate: {
     type: Date,
@@ -47,6 +75,10 @@ const courseSchema = new mongoose.Schema({
       default: Date.now
     }
   }],
+  isActive: {
+    type: Boolean,
+    default: true
+  },
   status: {
     type: String,
     enum: ['upcoming', 'ongoing', 'completed'],

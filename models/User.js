@@ -6,7 +6,10 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
     unique: true,
-    trim: true
+    trim: true,
+    minlength: 3,
+    maxlength: 30,
+    match: [/^[a-zA-Z0-9_]+$/, 'Username can only contain letters, numbers and underscores']
   },
   password: {
     type: String,
@@ -14,10 +17,12 @@ const userSchema = new mongoose.Schema({
   },
   email: {
     type: String,
-    required: true,
+    required: false,
     unique: true,
+    sparse: true,
     trim: true,
-    lowercase: true
+    lowercase: true,
+    match: [/^\S+@\S+\.\S+$/, 'Please use a valid email address']
   },
   firstName: {
     type: String,
@@ -31,6 +36,12 @@ const userSchema = new mongoose.Schema({
     type: String,
     enum: ['student', 'trainer', 'faculty', 'admin', 'superadmin'],
     required: true
+  },
+  college: {
+    type: String,
+    required: function() {
+      return ['faculty', 'superadmin'].includes(this.role);
+    }
   },
   // Student specific fields
   studentInfo: {

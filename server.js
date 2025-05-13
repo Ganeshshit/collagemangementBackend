@@ -1,74 +1,140 @@
-require('dotenv').config();
+require('dotenv').config({ path: './env.config' });
 const express = require('express');
-const cors = require('cors');
 const mongoose = require('mongoose');
+const cors = require('cors');
 const path = require('path');
+const helmet = require('helmet');
+const rateLimit = require('express-rate-limit');
+const { createServer } = require('http');
+const { Server } = require('socket.io');
+
+// Import routes
 const authRoutes = require('./routes/auth');
-const reportRoutes = require('./routes/reports');
 const adminRoutes = require('./routes/admin');
 const studentRoutes = require('./routes/student');
+const courseRoutes = require('./routes/courses');
+const reportRoutes = require('./routes/reports');
+const facultyDashboardRoutes = require('./routes/facultyDashboard');
+const adminUserManagementRoutes = require('./routes/adminUserManagement');
+const profileRoutes = require('./routes/profile');
+const superAdminDashboardRoutes = require('./routes/superAdminDashboard');
+const trainerDashboardRoutes = require('./routes/trainerDashboard');
+const trainerReportsRoutes = require('./routes/trainerReports');
+const assignmentRoutes = require('./routes/assignments');
 
+// Import middleware
+const { errorHandler } = require('./middleware/error');
+
+// Initialize Express app
 const app = express();
+const httpServer = createServer(app);
 
-// Enable CORS for frontend
-app.use(cors());
+// Socket.io setup
+const io = new Server(httpServer, {
+  cors: {
+    origin: process.env.FRONTEND_URL || 'http://localhost:3000',
+    methods: ['GET', 'POST'],
+    credentials: true
+  }
+});
 
-// Basic middleware
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-
-// Serve uploads folder
-app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+// Initialize WebSocket
+require('./utils/socket')(io);
 
 // Connect to MongoDB
-const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/faculty_management';
-console.log('Attempting to connect to MongoDB at:', MONGODB_URI);
-
-mongoose.connect(MONGODB_URI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true
-})
-.then(() => {
-  console.log('Successfully connected to MongoDB');
-  // List all collections to verify database access
-  mongoose.connection.db.listCollections().toArray((err, collections) => {
-    if (err) {
-      console.error('Error listing collections:', err);
-    } else {
-      console.log('Available collections:', collections.map(c => c.name));
-    }
+mongoose
+  .connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/college_management', {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+  })
+  .then(() => console.log('MongoDB connected'))
+  .catch(err => {
+    console.error('MongoDB connection error:', err);
+    process.exit(1); // Exit if we can't connect to database
   });
-})
-.catch(err => {
-  console.error('MongoDB connection error:', err);
-  process.exit(1); // Exit if we can't connect to database
+
+// Middleware
+app.use(cors());
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(helmet());
+
+// Rate limiting
+const limiter = rateLimit({
+  max: 100,
+  windowMs: 60 * 60 * 1000, // 1 hour
+  message: 'Too many requests from this IP, please try again in an hour!'
 });
+app.use('/api', limiter);
+
+// Static files
+app.use(express.static(path.join(__dirname, 'public')));
 
 // API Routes
 app.use('/api/auth', authRoutes);
-app.use('/api/reports', reportRoutes);
 app.use('/api/admin', adminRoutes);
 app.use('/api/student', studentRoutes);
+app.use('/api/courses', courseRoutes);
+app.use('/api/reports', reportRoutes);
+app.use('/api/faculty-dashboard', facultyDashboardRoutes);
+app.use('/api/admin/users', adminUserManagementRoutes);
+app.use('/api/profile', profileRoutes);
+app.use('/api/super-admin', superAdminDashboardRoutes);
+app.use('/api/trainer/dashboard', trainerDashboardRoutes);
+app.use('/api/trainer/reports', trainerReportsRoutes);
+app.use('/api/assignments', assignmentRoutes);
 
-// Test route
-app.get('/api/test', (req, res) => {
+// Root route
+app.get('/', (req, res) => {
   res.json({
-    message: 'API server is working!',
-    mongodbStatus: mongoose.connection.readyState === 1 ? 'connected' : 'disconnected'
+    message: 'College Management API',
+    status: 'running',
+    timestamp: new Date().toISOString(),
+    documentation: 'API documentation available at /api-docs'
   });
 });
 
-// Error handling
-app.use((err, req, res, next) => {
-  console.error('Error:', err);
-  res.status(500).json({
-    message: 'Server error',
-    error: process.env.NODE_ENV === 'development' ? err.message : undefined
+// Handle 404 - Not Found
+app.all('*', (req, res, next) => {
+  res.status(404).json({
+    status: 'error',
+    message: `Can't find ${req.originalUrl} on this server!`
   });
 });
+
+// Error handling middleware
+app.use(errorHandler);
 
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => {
-  console.log(`API Server running on http://localhost:${PORT}`);
-  console.log('Environment:', process.env.NODE_ENV);
+
+// Start server
+const server = httpServer.listen(PORT, () => {
+  console.log(`Server running in ${process.env.NODE_ENV || 'development'} mode on port ${PORT}`);
+  console.log(`MongoDB connected: ${mongoose.connection.host}`);
+});
+
+// Handle unhandled promise rejections
+process.on('unhandledRejection', (err) => {
+  console.error('UNHANDLED REJECTION! 💥 Shutting down...');
+  console.error(err.name, err.message);
+  server.close(() => {
+    process.exit(1);
+  });
+});
+
+// Handle uncaught exceptions
+process.on('uncaughtException', (err) => {
+  console.error('UNCAUGHT EXCEPTION! 💥 Shutting down...');
+  console.error(err.name, err.message);
+  server.close(() => {
+    process.exit(1);
+  });
+});
+
+// Handle SIGTERM
+process.on('SIGTERM', () => {
+  console.log('👋 SIGTERM RECEIVED. Shutting down gracefully');
+  server.close(() => {
+    console.log('💥 Process terminated!');
+  });
 });

@@ -28,6 +28,10 @@ const studentSchema = new mongoose.Schema({
     type: String,
     required: true
   },
+  college: {
+    type: String,
+    required: true
+  },
   semester: {
     type: Number,
     required: true,

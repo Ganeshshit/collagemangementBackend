@@ -1,0 +1,99 @@
+2025-05-13 17:13:00 [31merror[39m: 	[31mError: Can't find /api/auth/register on this server![39m
+[31m    at E:\collagemangementBackend-main\collagemangementBackend-main\server.js:153:15[39m
+[31m    at Layer.handle [as handle_request] (E:\collagemangementBackend-main\collagemangementBackend-main\node_modules\express\lib\router\layer.js:95:5)[39m
+[31m    at next (E:\collagemangementBackend-main\collagemangementBackend-main\node_modules\express\lib\router\route.js:149:13)[39m
+[31m    at next (E:\collagemangementBackend-main\collagemangementBackend-main\node_modules\express\lib\router\route.js:145:7)[39m
+[31m    at next (E:\collagemangementBackend-main\collagemangementBackend-main\node_modules\express\lib\router\route.js:145:7)[39m
+[31m    at next (E:\collagemangementBackend-main\collagemangementBackend-main\node_modules\express\lib\router\route.js:145:7)[39m
+[31m    at next (E:\collagemangementBackend-main\collagemangementBackend-main\node_modules\express\lib\router\route.js:145:7)[39m
+[31m    at next (E:\collagemangementBackend-main\collagemangementBackend-main\node_modules\express\lib\router\route.js:145:7)[39m
+[31m    at next (E:\collagemangementBackend-main\collagemangementBackend-main\node_modules\express\lib\router\route.js:145:7)[39m
+[31m    at next (E:\collagemangementBackend-main\collagemangementBackend-main\node_modules\express\lib\router\route.js:145:7)[39m
+2025-05-13 17:17:20 [31merror[39m: 	[31mError: Can't find /api/faculty/dashboard/overview on this server![39m
+[31m    at E:\collagemangementBackend-main\collagemangementBackend-main\server.js:153:15[39m
+[31m    at Layer.handle [as handle_request] (E:\collagemangementBackend-main\collagemangementBackend-main\node_modules\express\lib\router\layer.js:95:5)[39m
+[31m    at next (E:\collagemangementBackend-main\collagemangementBackend-main\node_modules\express\lib\router\route.js:149:13)[39m
+[31m    at next (E:\collagemangementBackend-main\collagemangementBackend-main\node_modules\express\lib\router\route.js:145:7)[39m
+[31m    at next (E:\collagemangementBackend-main\collagemangementBackend-main\node_modules\express\lib\router\route.js:145:7)[39m
+[31m    at next (E:\collagemangementBackend-main\collagemangementBackend-main\node_modules\express\lib\router\route.js:145:7)[39m
+[31m    at next (E:\collagemangementBackend-main\collagemangementBackend-main\node_modules\express\lib\router\route.js:145:7)[39m
+[31m    at next (E:\collagemangementBackend-main\collagemangementBackend-main\node_modules\express\lib\router\route.js:145:7)[39m
+[31m    at next (E:\collagemangementBackend-main\collagemangementBackend-main\node_modules\express\lib\router\route.js:145:7)[39m
+[31m    at Route.dispatch (E:\collagemangementBackend-main\collagemangementBackend-main\node_modules\express\lib\router\route.js:119:3)[39m
+2025-05-13 17:43:18 [31merror[39m: 	[31mError: Can't find /api/auth/test on this server![39m
+[31m    at E:\collagemangementBackend-main\collagemangementBackend-main\server.js:164:15[39m
+[31m    at Layer.handle [as handle_request] (E:\collagemangementBackend-main\collagemangementBackend-main\node_modules\express\lib\router\layer.js:95:5)[39m
+[31m    at next (E:\collagemangementBackend-main\collagemangementBackend-main\node_modules\express\lib\router\route.js:149:13)[39m
+[31m    at next (E:\collagemangementBackend-main\collagemangementBackend-main\node_modules\express\lib\router\route.js:145:7)[39m
+[31m    at next (E:\collagemangementBackend-main\collagemangementBackend-main\node_modules\express\lib\router\route.js:145:7)[39m
+[31m    at next (E:\collagemangementBackend-main\collagemangementBackend-main\node_modules\express\lib\router\route.js:145:7)[39m
+[31m    at next (E:\collagemangementBackend-main\collagemangementBackend-main\node_modules\express\lib\router\route.js:145:7)[39m
+[31m    at next (E:\collagemangementBackend-main\collagemangementBackend-main\node_modules\express\lib\router\route.js:145:7)[39m
+[31m    at next (E:\collagemangementBackend-main\collagemangementBackend-main\node_modules\express\lib\router\route.js:145:7)[39m
+[31m    at Route.dispatch (E:\collagemangementBackend-main\collagemangementBackend-main\node_modules\express\lib\router\route.js:119:3)[39m
+2025-05-13 17:43:19 [31merror[39m: 	[31mError: Can't find /favicon.ico on this server![39m
+[31m    at E:\collagemangementBackend-main\collagemangementBackend-main\server.js:164:15[39m
+[31m    at Layer.handle [as handle_request] (E:\collagemangementBackend-main\collagemangementBackend-main\node_modules\express\lib\router\layer.js:95:5)[39m
+[31m    at next (E:\collagemangementBackend-main\collagemangementBackend-main\node_modules\express\lib\router\route.js:149:13)[39m
+[31m    at next (E:\collagemangementBackend-main\collagemangementBackend-main\node_modules\express\lib\router\route.js:145:7)[39m
+[31m    at next (E:\collagemangementBackend-main\collagemangementBackend-main\node_modules\express\lib\router\route.js:145:7)[39m
+[31m    at next (E:\collagemangementBackend-main\collagemangementBackend-main\node_modules\express\lib\router\route.js:145:7)[39m
+[31m    at next (E:\collagemangementBackend-main\collagemangementBackend-main\node_modules\express\lib\router\route.js:145:7)[39m
+[31m    at next (E:\collagemangementBackend-main\collagemangementBackend-main\node_modules\express\lib\router\route.js:145:7)[39m
+[31m    at next (E:\collagemangementBackend-main\collagemangementBackend-main\node_modules\express\lib\router\route.js:145:7)[39m
+[31m    at Route.dispatch (E:\collagemangementBackend-main\collagemangementBackend-main\node_modules\express\lib\router\route.js:119:3)[39m
+2025-05-13 17:58:49 [31merror[39m: 	[31mError: Can't find / on this server![39m
+[31m    at E:\collagemangementBackend-main\collagemangementBackend-main\server.js:115:15[39m
+[31m    at Layer.handle [as handle_request] (E:\collagemangementBackend-main\collagemangementBackend-main\node_modules\express\lib\router\layer.js:95:5)[39m
+[31m    at next (E:\collagemangementBackend-main\collagemangementBackend-main\node_modules\express\lib\router\route.js:149:13)[39m
+[31m    at next (E:\collagemangementBackend-main\collagemangementBackend-main\node_modules\express\lib\router\route.js:145:7)[39m
+[31m    at next (E:\collagemangementBackend-main\collagemangementBackend-main\node_modules\express\lib\router\route.js:145:7)[39m
+[31m    at next (E:\collagemangementBackend-main\collagemangementBackend-main\node_modules\express\lib\router\route.js:145:7)[39m
+[31m    at next (E:\collagemangementBackend-main\collagemangementBackend-main\node_modules\express\lib\router\route.js:145:7)[39m
+[31m    at next (E:\collagemangementBackend-main\collagemangementBackend-main\node_modules\express\lib\router\route.js:145:7)[39m
+[31m    at next (E:\collagemangementBackend-main\collagemangementBackend-main\node_modules\express\lib\router\route.js:145:7)[39m
+[31m    at Route.dispatch (E:\collagemangementBackend-main\collagemangementBackend-main\node_modules\express\lib\router\route.js:119:3)[39m
+2025-05-13 18:00:50 [31merror[39m: 	[31mError: Can't find / on this server![39m
+[31m    at E:\collagemangementBackend-main\collagemangementBackend-main\server.js:115:15[39m
+[31m    at Layer.handle [as handle_request] (E:\collagemangementBackend-main\collagemangementBackend-main\node_modules\express\lib\router\layer.js:95:5)[39m
+[31m    at next (E:\collagemangementBackend-main\collagemangementBackend-main\node_modules\express\lib\router\route.js:149:13)[39m
+[31m    at next (E:\collagemangementBackend-main\collagemangementBackend-main\node_modules\express\lib\router\route.js:145:7)[39m
+[31m    at next (E:\collagemangementBackend-main\collagemangementBackend-main\node_modules\express\lib\router\route.js:145:7)[39m
+[31m    at next (E:\collagemangementBackend-main\collagemangementBackend-main\node_modules\express\lib\router\route.js:145:7)[39m
+[31m    at next (E:\collagemangementBackend-main\collagemangementBackend-main\node_modules\express\lib\router\route.js:145:7)[39m
+[31m    at next (E:\collagemangementBackend-main\collagemangementBackend-main\node_modules\express\lib\router\route.js:145:7)[39m
+[31m    at next (E:\collagemangementBackend-main\collagemangementBackend-main\node_modules\express\lib\router\route.js:145:7)[39m
+[31m    at Route.dispatch (E:\collagemangementBackend-main\collagemangementBackend-main\node_modules\express\lib\router\route.js:119:3)[39m
+2025-05-13 18:00:51 [31merror[39m: 	[31mError: Can't find / on this server![39m
+[31m    at E:\collagemangementBackend-main\collagemangementBackend-main\server.js:115:15[39m
+[31m    at Layer.handle [as handle_request] (E:\collagemangementBackend-main\collagemangementBackend-main\node_modules\express\lib\router\layer.js:95:5)[39m
+[31m    at next (E:\collagemangementBackend-main\collagemangementBackend-main\node_modules\express\lib\router\route.js:149:13)[39m
+[31m    at next (E:\collagemangementBackend-main\collagemangementBackend-main\node_modules\express\lib\router\route.js:145:7)[39m
+[31m    at next (E:\collagemangementBackend-main\collagemangementBackend-main\node_modules\express\lib\router\route.js:145:7)[39m
+[31m    at next (E:\collagemangementBackend-main\collagemangementBackend-main\node_modules\express\lib\router\route.js:145:7)[39m
+[31m    at next (E:\collagemangementBackend-main\collagemangementBackend-main\node_modules\express\lib\router\route.js:145:7)[39m
+[31m    at next (E:\collagemangementBackend-main\collagemangementBackend-main\node_modules\express\lib\router\route.js:145:7)[39m
+[31m    at next (E:\collagemangementBackend-main\collagemangementBackend-main\node_modules\express\lib\router\route.js:145:7)[39m
+[31m    at Route.dispatch (E:\collagemangementBackend-main\collagemangementBackend-main\node_modules\express\lib\router\route.js:119:3)[39m
+2025-05-13 18:00:52 [31merror[39m: 	[31mError: Can't find / on this server![39m
+[31m    at E:\collagemangementBackend-main\collagemangementBackend-main\server.js:115:15[39m
+[31m    at Layer.handle [as handle_request] (E:\collagemangementBackend-main\collagemangementBackend-main\node_modules\express\lib\router\layer.js:95:5)[39m
+[31m    at next (E:\collagemangementBackend-main\collagemangementBackend-main\node_modules\express\lib\router\route.js:149:13)[39m
+[31m    at next (E:\collagemangementBackend-main\collagemangementBackend-main\node_modules\express\lib\router\route.js:145:7)[39m
+[31m    at next (E:\collagemangementBackend-main\collagemangementBackend-main\node_modules\express\lib\router\route.js:145:7)[39m
+[31m    at next (E:\collagemangementBackend-main\collagemangementBackend-main\node_modules\express\lib\router\route.js:145:7)[39m
+[31m    at next (E:\collagemangementBackend-main\collagemangementBackend-main\node_modules\express\lib\router\route.js:145:7)[39m
+[31m    at next (E:\collagemangementBackend-main\collagemangementBackend-main\node_modules\express\lib\router\route.js:145:7)[39m
+[31m    at next (E:\collagemangementBackend-main\collagemangementBackend-main\node_modules\express\lib\router\route.js:145:7)[39m
+[31m    at Route.dispatch (E:\collagemangementBackend-main\collagemangementBackend-main\node_modules\express\lib\router\route.js:119:3)[39m
+2025-05-13 18:00:53 [31merror[39m: 	[31mError: Can't find / on this server![39m
+[31m    at E:\collagemangementBackend-main\collagemangementBackend-main\server.js:115:15[39m
+[31m    at Layer.handle [as handle_request] (E:\collagemangementBackend-main\collagemangementBackend-main\node_modules\express\lib\router\layer.js:95:5)[39m
+[31m    at next (E:\collagemangementBackend-main\collagemangementBackend-main\node_modules\express\lib\router\route.js:149:13)[39m
+[31m    at next (E:\collagemangementBackend-main\collagemangementBackend-main\node_modules\express\lib\router\route.js:145:7)[39m
+[31m    at next (E:\collagemangementBackend-main\collagemangementBackend-main\node_modules\express\lib\router\route.js:145:7)[39m
+[31m    at next (E:\collagemangementBackend-main\collagemangementBackend-main\node_modules\express\lib\router\route.js:145:7)[39m
+[31m    at next (E:\collagemangementBackend-main\collagemangementBackend-main\node_modules\express\lib\router\route.js:145:7)[39m
+[31m    at next (E:\collagemangementBackend-main\collagemangementBackend-main\node_modules\express\lib\router\route.js:145:7)[39m
+[31m    at next (E:\collagemangementBackend-main\collagemangementBackend-main\node_modules\express\lib\router\route.js:145:7)[39m
+[31m    at Route.dispatch (E:\collagemangementBackend-main\collagemangementBackend-main\node_modules\express\lib\router\route.js:119:3)[39m

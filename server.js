@@ -21,6 +21,8 @@ const superAdminDashboardRoutes = require('./routes/superAdminDashboard');
 const trainerDashboardRoutes = require('./routes/trainerDashboard');
 const trainerReportsRoutes = require('./routes/trainerReports');
 const assignmentRoutes = require('./routes/assignments');
+const assignmentResourcesRoutes = require('./routes/assignmentResources');
+const attendanceReportsRoutes = require('./routes/attendanceReports');
 
 // Import middleware
 const { errorHandler } = require('./middleware/error');
@@ -83,6 +85,8 @@ app.use('/api/super-admin', superAdminDashboardRoutes);
 app.use('/api/trainer/dashboard', trainerDashboardRoutes);
 app.use('/api/trainer/reports', trainerReportsRoutes);
 app.use('/api/assignments', assignmentRoutes);
+app.use('/api/assignment-resources', assignmentResourcesRoutes);
+app.use('/api/attendance/reports', attendanceReportsRoutes);
 
 // Root route
 app.get('/', (req, res) => {
